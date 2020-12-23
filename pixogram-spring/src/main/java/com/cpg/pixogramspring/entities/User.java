@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -20,6 +21,7 @@ public class User {
 	private int user_id;
 	@ApiModelProperty(notes = "The username of user")
 	private String username;
+	//@Pattern("")
 	@ApiModelProperty(notes = "Password of user")
 	private String password;
 	@ApiModelProperty(notes = "The email Id of of user")
@@ -30,9 +32,8 @@ public class User {
 	private String state;
 	@ApiModelProperty(notes = "Give some info about you or your thoughts")
 	private String bio;
-
 	@ApiModelProperty(notes = "The role of use as (admin/General user)")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="ur_id" , referencedColumnName="role_id")
 	private Role role;
 

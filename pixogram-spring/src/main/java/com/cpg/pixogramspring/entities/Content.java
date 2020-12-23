@@ -1,5 +1,7 @@
 package com.cpg.pixogramspring.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,31 +27,29 @@ public class Content {
 	private String filename;
 	@ApiModelProperty(notes = "The type(image/video) uploaded")
 	private String filetype;
+	@ApiModelProperty(notes = "Like user's content")
+	private int likes;
+	@ApiModelProperty(notes = "Dislike user's content")
+	private int dislikes;
 	@ApiModelProperty(notes = "The info of the user who is uploading ")
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="uc_id", referencedColumnName="user_id")
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+	@JoinColumn(name = "uc_id", referencedColumnName = "user_id")
 	private User user;
+	@ApiModelProperty(notes = "The comment for a particular content ")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "content", referencedColumnName = "content_id")
+	private List<Comment> comments;
 	
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Content() {
 
 	}
-	
+
 	public Content(String caption, String filename, String filetype) {
 		super();
 		this.caption = caption;
 		this.filename = filename;
 		this.filetype = filetype;
 	}
-
 
 	public String getCaption() {
 		return caption;
@@ -59,50 +59,66 @@ public class Content {
 		this.caption = caption;
 	}
 
-//	public File getFile() {
-//		return file;
-//	}
-//
-//	public void setFile(File file) {
-//		this.file = file;
-//	}
-
-	
 	public int getContent_id() {
 		return content_id;
 	}
-
 
 	public void setContent_id(int content_id) {
 		this.content_id = content_id;
 	}
 
-
 	public String getFilename() {
 		return filename;
 	}
-
 
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 
-
 	public String getFiletype() {
 		return filetype;
 	}
 
-
 	public void setFiletype(String filetype) {
 		this.filetype = filetype;
 	}
+	
+	public int getLike() {
+		return likes;
+	}
 
+	public void setLike(int likes) {
+		this.likes = likes;
+	}
+
+	public int getDislike() {
+		return dislikes;
+	}
+
+	public void setDislike(int dislikes) {
+		this.dislikes = dislikes;
+	}
+
+	public List<Comment> getComment() {
+		return comments;
+	}
+
+	public void setComment(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
-		return "Content [content_id=" + content_id + ", caption=" + caption + ", filename="
-				+ filename + ", filetype=" + filetype + "]";
+		return "Content [content_id=" + content_id + ", caption=" + caption + ", filename=" + filename + ", filetype="
+				+ filetype + "]";
 	}
-
 
 }
