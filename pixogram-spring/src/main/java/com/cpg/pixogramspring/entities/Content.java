@@ -41,7 +41,6 @@ public class Content {
 	private List<Comment> comments;
 	
 	public Content() {
-
 	}
 
 	public Content(String caption, String filename, String filetype) {

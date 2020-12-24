@@ -16,7 +16,7 @@ public class Comment {
 	private int comment_id;
 	@ApiModelProperty(notes = "The comment/message on content")
 	private String comment;
-	
+	@ApiModelProperty(notes = "The email id of user")
 	private String username;
 
 	public Comment() {

@@ -1,5 +1,7 @@
 package com.cpg.pixogramspring.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Pattern;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,10 +24,11 @@ public class User {
 	private int user_id;
 	@ApiModelProperty(notes = "The username of user")
 	private String username;
-	//@Pattern("")
+	@Pattern(regexp="^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])" + "(?=\\S+$).{8,20}$", message="length must be 8 or above")
 	@ApiModelProperty(notes = "Password of user")
 	private String password;
 	@ApiModelProperty(notes = "The email Id of of user")
+	@Pattern(regexp = "^(.+)@(.+)$", message = "provide correct email")
 	private String email;
 	@ApiModelProperty(notes = "The gender of user")
 	private String gender;
@@ -36,9 +40,12 @@ public class User {
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="ur_id" , referencedColumnName="role_id")
 	private Role role;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Content> contents;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Followers> followers;
 
 	public User() {
-
 	}
 
 	public User(String username, String password, String email, String gender, String state, String bio, Role role) {

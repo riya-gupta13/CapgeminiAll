@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cpg.pixogramspring.constants.UserConstants;
 import com.cpg.pixogramspring.entities.Comment;
 import com.cpg.pixogramspring.entities.Content;
 import com.cpg.pixogramspring.entities.User;
@@ -44,7 +45,7 @@ public class ContentServiceImpl implements ContentService {
 		try {
 		Content content=new Content(caption,filename,filetype);
 		if(existingUser==null) {
-			throw new UserNotFoundException(userNotFoundMessage);
+			throw new UserNotFoundException(UserConstants.userNotExists);
 		}
 		if((user_id)==(existingUser.getUser_id())){
 			content.setUser(existingUser);
@@ -65,7 +66,7 @@ public class ContentServiceImpl implements ContentService {
 			return foundContent;
 	}
 		else {
-			throw new ContentNotFoundException(contentNotFoundMessage);
+			throw new ContentNotFoundException(UserConstants.contentNotExists);
 		}
 	}
 
@@ -78,21 +79,21 @@ public class ContentServiceImpl implements ContentService {
 	public void deleteContent(int content_id) throws ContentNotFoundException {
 		Optional<Content> content = contentRepository.findById(content_id);
 		if(!content.isPresent()) {
-			throw new ContentNotFoundException(contentNotFoundMessage);
+			throw new ContentNotFoundException(UserConstants.contentNotExists);
 		}
 		else {
 			contentRepository.deleteById(content_id);
 		}
 	}
 	
-////	public Content updateContent(Content content) throws ContentNotFoundException {
-////		Content existingContent= contentRepository.findContentById(content.getContent_id());
-////		if(existingContent!=null) {
-////			return contentRepository.save(content);
-////		}
-////		else {
-////			throw new ContentNotFoundException(contentNotFoundMessage);
-////		}
+//	public Content updateContent(Content content) throws ContentNotFoundException {
+//		Content existingContent= contentRepository.findContentById(content.getContent_id());
+//		if(existingContent!=null) {
+//			return contentRepository.save(content);
+//		}
+//		else {
+//			throw new ContentNotFoundException(contentNotFoundMessage);
+//		}
 //		
 //	}
 	
@@ -115,15 +116,11 @@ public class ContentServiceImpl implements ContentService {
 	public Content addLikes(int content_id) throws ContentNotFoundException {
 		Content existingContent=contentRepository.findContentById(content_id);
 		int like=existingContent.getLike();
-		// contentRepository.countLikes();
 		if(existingContent!=null) {
 			like+=1;
 			existingContent.setLike(like);
 		}	
 		return contentRepository.save(existingContent);
-//		else {
-//			throw new ContentNotFoundException("Content Not Found");
-//		}
 	}
 	
 	@Override

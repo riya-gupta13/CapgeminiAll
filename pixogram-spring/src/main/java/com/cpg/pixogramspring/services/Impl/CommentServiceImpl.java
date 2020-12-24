@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cpg.pixogramspring.constants.UserConstants;
 import com.cpg.pixogramspring.entities.Comment;
 import com.cpg.pixogramspring.exceptions.CommentNotExistsException;
 import com.cpg.pixogramspring.repositories.CommentRepository;
@@ -19,7 +20,7 @@ public class CommentServiceImpl implements CommentService{
 	public void deleteComment(int comment_id) throws CommentNotExistsException {
 		Optional<Comment> comment=commentRepository.findById(comment_id);
 		if(!comment.isPresent()) {
-			throw new CommentNotExistsException("Not Exists");
+			throw new CommentNotExistsException(UserConstants.commentNotExists);
 		}
 		commentRepository.deleteById(comment_id);
 	}
@@ -32,7 +33,7 @@ public class CommentServiceImpl implements CommentService{
 			return foundComment;
 		}
 		else {
-			throw new CommentNotExistsException("Not Exists");
+			throw new CommentNotExistsException(UserConstants.commentNotExists);
 		}	
 	}
 

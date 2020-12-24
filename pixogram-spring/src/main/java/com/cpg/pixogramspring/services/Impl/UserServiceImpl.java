@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.cpg.pixogramspring.constants.UserConstants;
 import com.cpg.pixogramspring.entities.Role;
 import com.cpg.pixogramspring.entities.User;
 import com.cpg.pixogramspring.exceptions.UserAlreadyExistsException;
@@ -17,16 +18,6 @@ import com.cpg.pixogramspring.services.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 	
-	
-	
-	@Value("User Already Exists!")
-	private String userAlreadyExistsMessage;
-	@Value("User not found!!")
-	private String userNotFoundMessage;
-	@Value("Use a correct Password(minimum length 8)")
-	private String passwordValidation;
-	@Value("Use a correct Email")
-	private String emailValidation;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -40,7 +31,7 @@ public class UserServiceImpl implements UserService{
 			if (pswrd.matches(passwordpattern)) {
 				User existingUser = userRepository.findByEmail(user.getEmail());
 				if (existingUser != null) {
-					throw new UserAlreadyExistsException(userAlreadyExistsMessage);
+					throw new UserAlreadyExistsException(UserConstants.userAlreadyExists);
 				}
 				Role role = user.getRole();
 				Role existingRole = userRepository.findRole(user.getRole().getRolename());
@@ -49,10 +40,10 @@ public class UserServiceImpl implements UserService{
 				}	
 				userRepository.save(user);
 			}else {
-				throw new ValidationException(passwordValidation);
+				throw new ValidationException(UserConstants.passwordValidation);
 			}
 		} else {
-			throw new ValidationException(emailValidation);
+			throw new ValidationException(UserConstants.emailValidation);
 		}
 		return user;
 	}
@@ -65,7 +56,7 @@ public class UserServiceImpl implements UserService{
 	public void deleteUser(int user_id)  {
 		Optional<User> existingUser= userRepository.findById(user_id);
 		if(!existingUser.isPresent()) {
-			throw new UserNotFoundException(userNotFoundMessage);
+			throw new UserNotFoundException(UserConstants.userNotExists);
 		} else {
 			userRepository.deleteById(user_id);
 		}	
@@ -84,7 +75,7 @@ public class UserServiceImpl implements UserService{
 			return user;
 		}
 		else {
-			throw new UserNotFoundException(userNotFoundMessage);
+			throw new UserNotFoundException(UserConstants.userNotExists);
 		}
 		
 	}
@@ -96,7 +87,7 @@ public class UserServiceImpl implements UserService{
 			return user;
 		}
 		else {
-			throw new UserNotFoundException(userNotFoundMessage);
+			throw new UserNotFoundException(UserConstants.userNotExists);
 		}
 	}
 
@@ -112,7 +103,7 @@ public class UserServiceImpl implements UserService{
 			return userRepository.save(user);
 		}
 		else {
-			throw new UserNotFoundException(userNotFoundMessage);
+			throw new UserNotFoundException(UserConstants.userNotExists);
 		}
 		
 	}
