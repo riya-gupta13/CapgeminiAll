@@ -12,6 +12,8 @@ public class UserConstants {
 	public static final String contentNotExists="Content does not exists/found!!";
 	public static final String followerNotUser="Follower is not a User!!";
 	public static final String commentNotExists="Comment not exists/found!!";
+	public static final String alreadyFollowing="Already Following";
+	public static final String unfollowing="Unfollowed a user";
 	
 
 }

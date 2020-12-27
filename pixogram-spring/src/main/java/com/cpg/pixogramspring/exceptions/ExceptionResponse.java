@@ -9,7 +9,7 @@ public class ExceptionResponse {
 	private String message;
 	private String details;
 	
-	public ExceptionResponse(int statusCode,Date timeStamp, String message, String details) {
+	public ExceptionResponse(int statusCode, Date timeStamp, String message, String details) {
 		super();
 		this.statusCode=statusCode;
 		this.timeStamp = timeStamp;

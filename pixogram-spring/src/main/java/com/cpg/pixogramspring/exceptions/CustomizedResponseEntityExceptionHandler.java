@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 	
-	@ExceptionHandler(UserAlreadyExistsException.class)
-	public final ResponseEntity<Object> handleUserAlreadyExistsException(UserAlreadyExistsException ex, WebRequest request) {
+	@ExceptionHandler(AlreadyExistsException.class)
+	public final ResponseEntity<Object> handleAlreadyExistsException(AlreadyExistsException ex, WebRequest request) {
 	
 	 ExceptionResponse exceptionResponse  = new ExceptionResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), new Date(), ex.getMessage(), request.getDescription(false));
 	 
@@ -23,8 +23,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	
     }
 	
-	@ExceptionHandler(UserNotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
+	@ExceptionHandler(NotFoundException.class)
+	public final ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
 	
 	 ExceptionResponse exceptionResponse  = new ExceptionResponse(HttpStatus.NOT_FOUND.value(), new Date(), ex.getMessage(), request.getDescription(false));
 	 
@@ -41,26 +41,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	
     }
 	
-	@ExceptionHandler(ContentNotFoundException.class)
-	public final ResponseEntity<Object> handleContentNotFoundException(ContentNotFoundException ex, WebRequest request) {
-	
-	 ExceptionResponse exceptionResponse  = new ExceptionResponse(HttpStatus.NOT_FOUND.value(), new Date(), ex.getMessage(), request.getDescription(false));
-	 
-	 return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
-	
-    }
-
-	@ExceptionHandler(CommentNotExistsException.class)
-	public final ResponseEntity<Object> handleCommentNotExistsException(CommentNotExistsException ex, WebRequest request) {
-	
-	 ExceptionResponse exceptionResponse  = new ExceptionResponse(HttpStatus.NOT_FOUND.value(),new Date(), ex.getMessage(), request.getDescription(false));
-	 
-	 return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
-	
-    }
-	
-	@ExceptionHandler(FollowerIsNotAUserException.class)
-	public final ResponseEntity<Object> handleFollowerIsNotAUserException(FollowerIsNotAUserException ex, WebRequest request) {
+	@ExceptionHandler(NotAUserException.class)
+	public final ResponseEntity<Object> handleNotAUserException(NotAUserException ex, WebRequest request) {
 	
 	 ExceptionResponse exceptionResponse  = new ExceptionResponse(HttpStatus.NOT_FOUND.value(),new Date(), ex.getMessage(), request.getDescription(false));
 	 
