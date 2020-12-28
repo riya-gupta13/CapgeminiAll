@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,11 +15,13 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(notes = "The unique Id of comment")
 	private int comment_id;
+	
 	@ApiModelProperty(notes = "The comment/message on content")
 	private String comment;
+	
 	@ApiModelProperty(notes = "The email id of user")
 	private String useremail;
-
+	
 	public Comment() {
 		super();
 	}

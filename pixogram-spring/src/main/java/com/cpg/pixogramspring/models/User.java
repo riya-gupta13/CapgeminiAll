@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,26 +24,41 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(notes = "The unique Id of user")
 	private int user_id;
+	
 	@ApiModelProperty(notes = "The username of user")
 	private String username;
+	
 	@Pattern(regexp="^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])" + "(?=\\S+$).{8,20}$", message="length must be 8 or above")
 	@ApiModelProperty(notes = "Password of user")
 	private String password;
+	
 	@ApiModelProperty(notes = "The email Id of of user")
 	@Pattern(regexp = "^(.+)@(.+)$", message = "provide correct email")
 	private String email;
+	
 	@ApiModelProperty(notes = "The gender of user")
 	private String gender;
+	
 	@ApiModelProperty(notes = "The state which user belongs")
 	private String state;
+	
 	@ApiModelProperty(notes = "Give some info about you or your thoughts")
 	private String bio;
+	
 	@ApiModelProperty(notes = "The role of use as (admin/General user)")
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="ur_id" , referencedColumnName="role_id")
 	private Role role;
+	
+	@ApiModelProperty(notes = "List of contents of a user")
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Content> contents;
+	
+	@ApiModelProperty(notes = "List of Followers of a usedr")
+	@JsonIgnore
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Followers> followers;
 	
 
 	public User(User user) {
@@ -51,6 +68,7 @@ public class User {
 		this.gender = gender;
 		this.state = state;
 		this.bio = bio;
+		this.role = role;
 	}
 	
 	public User() {
@@ -146,9 +164,6 @@ public class User {
 	public void setFollowers(List<Followers> followers) {
 		this.followers = followers;
 	}
-
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private List<Followers> followers;
 
 	@Override
 	public String toString() {

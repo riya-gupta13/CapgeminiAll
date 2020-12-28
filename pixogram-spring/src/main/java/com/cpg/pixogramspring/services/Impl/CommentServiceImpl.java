@@ -17,6 +17,9 @@ public class CommentServiceImpl implements CommentService{
 	@Autowired
 	CommentRepository commentRepository;
 	
+	/**
+	 * Deleting a particular comment
+	 */
 	@Override
 	public void deleteComment(int comment_id){
 		Optional<Comment> comment=commentRepository.findById(comment_id);
@@ -26,6 +29,9 @@ public class CommentServiceImpl implements CommentService{
 		commentRepository.deleteById(comment_id);
 	}
 
+	/**
+	 * Finding a particular comment
+	 */
 	@Override
 	public Comment getComment(int comment_id){
 		Optional<Comment> comment=commentRepository.findById(comment_id);

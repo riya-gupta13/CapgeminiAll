@@ -20,10 +20,13 @@ public class Followers{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(notes = "The Id value of follower")
 	private int follower_id;
+	
 	@ApiModelProperty(notes = "The Email Id of follower")
 	private String follower__email;
+	
 	@ApiModelProperty(notes = "The email Id of user u want to follow")
 	private String user_email;
+	
 	@JsonIgnore
 	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="user_id", referencedColumnName="user_id")

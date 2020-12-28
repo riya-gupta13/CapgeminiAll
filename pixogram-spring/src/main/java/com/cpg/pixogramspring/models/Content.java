@@ -23,22 +23,30 @@ public class Content {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(notes = "The unique Id of content")
 	private int content_id;
+	
 	@ApiModelProperty(notes = "The caption for uploaded image/video")
 	private String caption;
+	
 	@ApiModelProperty(notes = "The name of the image/video you uploaded")
 	private String filename;
+	
 	@ApiModelProperty(notes = "The type(image/video) uploaded")
 	private String filetype;
+	
 	@ApiModelProperty(notes = "Like user's content")
 	private int likes;
+	
 	@ApiModelProperty(notes = "Dislike user's content")
 	private int dislikes;
+	
 	@ApiModelProperty(notes = "The info of the user who is uploading ")
 	@JsonIgnore
 	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
+	
 	@ApiModelProperty(notes = "The comment for a particular content ")
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "content", referencedColumnName = "content_id")
 	private List<Comment> comments;

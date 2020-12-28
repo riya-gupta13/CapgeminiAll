@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import com.cpg.pixogramspring.models.Content;
 
 public interface ContentRepository extends JpaRepository<Content, Integer>  {
-	
-	Content findByCaption(String caption);
 
+	/**
+	 * To find a content by its Id
+	 * @param content_id
+	 * @return Content
+	 */
 	@Query("select c from Content c where c.content_id=?1")
 	Content findContentById(int content_id);
 }

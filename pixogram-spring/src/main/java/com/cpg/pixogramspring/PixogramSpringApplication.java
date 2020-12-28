@@ -22,7 +22,6 @@ public class PixogramSpringApplication {
 		SpringApplication.run(PixogramSpringApplication.class, args);
 	}
 	
-	
 	@Bean
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -34,7 +33,7 @@ public class PixogramSpringApplication {
 	}
 	private ApiInfo apiInfo(){
 		return new ApiInfoBuilder().title("PIXOGRAM APP API")
-		.description("This API can be used to upload images and videos and create your own profile")
+		.description("This API can be used to upload images and videos and also to create your own profile")
 		.build();	
 	}
 }
