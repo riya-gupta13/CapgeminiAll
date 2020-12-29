@@ -37,8 +37,8 @@ public class UserController {
 	private UserService userService;
 
 	/**
-	 * This method can be used by both admin and user
-	 * Signing in as a user
+	 * This method can be used by both admin and user Signing in as a user
+	 * 
 	 * @param user
 	 * @return Response Status
 	 */
@@ -53,8 +53,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method is only for admin
-	 * Finding a particular user by userId
+	 * This method is only for admin Finding a particular user by userId
+	 * 
 	 * @param user_id
 	 * @return user
 	 */
@@ -73,8 +73,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method is only for admin
-	 * Finding a particular user by email
+	 * This method is only for admin Finding a particular user by email
+	 * 
 	 * @param email
 	 * @return user
 	 */
@@ -90,8 +90,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method is only for admin
-	 * To see All users 
+	 * This method is only for admin To see All users
+	 * 
 	 * @return user
 	 */
 	@GetMapping("/userall")
@@ -106,8 +106,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method is for admin and user both
-	 * Adding a user by specifying its role
+	 * This method is for admin and user both Adding a user by specifying its role
+	 * 
 	 * @param user
 	 * @return Response Status
 	 */
@@ -123,8 +123,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method is only for admin
-	 * Deleting a user by userId
+	 * This method is only for admin Deleting a user by userId
+	 * 
 	 * @param user_id
 	 * @return Response Status
 	 */
@@ -137,8 +137,9 @@ public class UserController {
 	}
 
 	/**
-	 * This method is for user and admin both
-	 * Updating user, to make some changes in your personal account
+	 * This method is for user and admin both Updating user, to make some changes in
+	 * your personal account
+	 * 
 	 * @param user
 	 * @return Response Status
 	 */
@@ -156,8 +157,8 @@ public class UserController {
 //............................................USER METHODS............................................................//
 
 	/**
-	 * This method is only for user
-	 * To follow a particular user
+	 * This method is only for user To follow a particular user
+	 * 
 	 * @param user_id
 	 * @param follower_email
 	 * @param email
@@ -168,14 +169,14 @@ public class UserController {
 	public ResponseEntity<Followers> follow(
 			@ApiParam(value = "ID value for the user you want to follow", required = true) @RequestParam("user_id") int user_id,
 			@ApiParam(value = "Email id of you", required = true) @RequestParam("follower_email") String follower_email,
-			@ApiParam(value = "Email id of user", required = true) @RequestParam("email") String email){
+			@ApiParam(value = "Email id of user", required = true) @RequestParam("email") String email) {
 		Followers follower = followerService.followUser(user_id, email, follower_email);
 		return new ResponseEntity<>(follower, HttpStatus.CREATED);
 	}
 
 	/**
-	 * This method is only for user
-	 * To unfollow a particular user 
+	 * This method is only for user To unfollow a particular user
+	 * 
 	 * @param user_id     userId
 	 * @param follower_id followerId
 	 * @return Response status
@@ -184,14 +185,14 @@ public class UserController {
 	@ApiOperation(value = "Un Following", notes = "Un Following users", response = Followers.class)
 	public ResponseEntity<String> unfollow(
 			@ApiParam(value = "ID value for the user you want to follow", required = true) @RequestParam("user_id") int user_id,
-			@ApiParam(value = "ID value of the follower", required = true) @RequestParam("follower_id") int follower_id){
-			followerService.unFollowUser(follower_id, user_id);
-			return new ResponseEntity<>(UserConstants.unfollowing, HttpStatus.CREATED);
+			@ApiParam(value = "ID value of the follower", required = true) @RequestParam("follower_id") int follower_id) {
+		followerService.unFollowUser(follower_id, user_id);
+		return new ResponseEntity<>(UserConstants.unfollowing, HttpStatus.CREATED);
 	}
 
 	/**
-	 * This method is only for users
-	 * To get all the followers of a particular user
+	 * This method is only for users To get all the followers of a particular user
+	 * 
 	 * @param user_id
 	 * @return List of Followers
 	 */

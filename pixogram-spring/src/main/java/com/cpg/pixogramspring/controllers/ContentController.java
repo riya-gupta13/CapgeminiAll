@@ -40,8 +40,8 @@ public class ContentController {
 	private CommentService commentService;
 
 	/**
-	 *  This method is only for user
-	 *  For adding images/videos in user's account
+	 * This method is only for user For adding images/videos in user's account
+	 * 
 	 * @param file
 	 * @param caption
 	 * @param user_id
@@ -65,8 +65,8 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for user
-	 * Searching a particular image/video you uploaded
+	 * This method is only for user Searching a particular image/video you uploaded
+	 * 
 	 * @param content_id
 	 * @return Content
 	 */
@@ -85,8 +85,8 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for admin
-	 * To find all the contents
+	 * This method is only for admin To find all the contents
+	 * 
 	 * @return contents
 	 */
 	@GetMapping("/uploadsall")
@@ -101,8 +101,9 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for user
-	 * To delete a particular image/video from your account
+	 * This method is only for user To delete a particular image/video from your
+	 * account
+	 * 
 	 * @param content_id
 	 * @return Response Status
 	 */
@@ -118,8 +119,8 @@ public class ContentController {
 //.........................................USER METHODS ON CONTENTS...................................................//
 
 	/**
-	 * This method is only for user
-	 * adding comments to the contents uploaded
+	 * This method is only for user adding comments to the contents uploaded
+	 * 
 	 * @param content_id
 	 * @param user_id
 	 * @param comment
@@ -140,8 +141,8 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for user
-	 * Finding a particular comment
+	 * This method is only for user Finding a particular comment
+	 * 
 	 * @param comment_id
 	 * @return Response Status
 	 */
@@ -154,8 +155,8 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for user
-	 * Finding a particular comment
+	 * This method is only for user Finding a particular comment
+	 * 
 	 * @param comment_id
 	 * @return Comment
 	 */
@@ -174,8 +175,8 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for user
-	 * For adding likes to images/videos uploaded
+	 * This method is only for user For adding likes to images/videos uploaded
+	 * 
 	 * @param user_id
 	 * @param content_id
 	 * @return Response status
@@ -194,8 +195,8 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is only for user
-	 * For adding dislikes to images/videos uploaded
+	 * This method is only for user For adding dislikes to images/videos uploaded
+	 * 
 	 * @param user_id
 	 * @param content_id
 	 * @return Response status
@@ -214,8 +215,9 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is for user and admin
-	 * To get track of contents for a specific user
+	 * This method is for user and admin To get track of contents for a specific
+	 * user
+	 * 
 	 * @param user_id
 	 * @return List of Content
 	 */
@@ -232,8 +234,9 @@ public class ContentController {
 	}
 
 	/**
-	 * This method is for user and admin both
-	 * To find all the comments of particular user
+	 * This method is for user and admin both To find all the comments of particular
+	 * user
+	 * 
 	 * @param user_id
 	 * @return List of Comments
 	 */

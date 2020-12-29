@@ -31,13 +31,17 @@ public class ContentServiceImpl implements ContentService {
 	 * Uploading images/videos to your account
 	 */
 	@Override
-	public Content uploadFile(MultipartFile file, String caption, int user_id) throws IllegalStateException, IOException {
+	public Content uploadFile(MultipartFile file, String caption, int user_id)
+			throws IllegalStateException, IOException {
 		long append = System.nanoTime();
 		String filename = append + "_" + file.getOriginalFilename();
 		String filetype = file.getContentType();
 		Optional<User> existingUser = userRepository.findByUserId(user_id);
-		//file.transferTo(new File("E:\\Sprint\\uploads\\" + file.getOriginalFilename()));
-		 file.transferTo(new File("E:\\softwares\\neweclipse\\eclipse\\pixogram-spring\\src\\main\\resources\\static\\uploads\\" +file.getOriginalFilename()));
+		// file.transferTo(new File("E:\\Sprint\\uploads\\" +
+		// file.getOriginalFilename()));
+		file.transferTo(
+				new File("E:\\softwares\\neweclipse\\eclipse\\pixogram-spring\\src\\main\\resources\\static\\uploads\\"
+						+ file.getOriginalFilename()));
 		Content content = new Content(caption, filename, filetype);
 		if (existingUser.isPresent()) {
 			content.setUser(existingUser.get());
@@ -61,7 +65,7 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	/**
-	 * getting all contents 
+	 * Getting all contents
 	 */
 	@Override
 	public List<Content> allContent() {
@@ -69,7 +73,7 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	/**
-	 * deleting a particular content
+	 * Deleting a particular content
 	 */
 	@Override
 	public void deleteContent(int content_id) {

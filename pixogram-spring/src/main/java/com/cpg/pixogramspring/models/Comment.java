@@ -15,21 +15,28 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(notes = "The unique Id of comment")
 	private int comment_id;
-	
+
 	@ApiModelProperty(notes = "The comment/message on content")
 	private String comment;
-	
+
 	@ApiModelProperty(notes = "The email id of user")
 	private String useremail;
-	
+
 	public Comment() {
 		super();
 	}
 
-	public Comment(String comment,String username) {
+	public Comment(int comment_id, String comment, String useremail) {
+		super();
+		this.comment_id = comment_id;
+		this.comment = comment;
+		this.useremail = useremail;
+	}
+
+	public Comment(String comment, String useremail) {
 		super();
 		this.comment = comment;
-		this.useremail=username;
+		this.useremail = useremail;
 	}
 
 	public String getUseremail() {
@@ -61,5 +68,4 @@ public class Comment {
 		return "Comment [comment_id=" + comment_id + ", comment=" + comment + ", useremail=" + useremail + "]";
 	}
 
-	
 }
